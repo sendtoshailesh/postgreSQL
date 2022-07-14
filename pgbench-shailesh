@@ -1,0 +1,83 @@
+intiailise pgbench with scale factor of 10
+
+pgbench -i -s 10 --host=10.45.195.2 --username=postgres postgres
+
+performance test against 10 clients that are accessing your AlloyDB for PostgreSQL database and 100 transactions for each client.
+pgbench --host=10.45.195.2 --username=postgres -c 10 --transactions=100
+
+
+pgbench with only select for 5 min on reader instance with scale up and down
+pgbench --host=10.45.195.5 --username=postgres -n -c 10 -S -T 300 -P 5
+
+pgbench with only select for 5 min on writer instance with scale up and down
+pgbench --host=10.45.195.2 --username=postgres -n -c 10 -T 300 -P 5
+
+
+
+-c clients --client=clients
+
+Number of clients simulated, that is, number of concurrent database sessions. Default is 1.
+-C --connect
+
+Establish a new connection for each transaction, rather than doing it just once per client session. This is useful to measure the connection overhead.
+
+-S --select-only Run built-in select-only script. Shorthand for -b select-only.
+
+-t transactions --transactions=transactions Number of transactions each client runs. Default is 10.
+
+-T seconds --time=seconds Run the test for this many seconds, rather than a fixed number of transactions per client. -t and -T are mutually exclusive.
+
+-F fillfactor --fillfactor=fillfactor
+
+Create the pgbench_accounts, pgbench_tellers and pgbench_branches tables with the given fillfactor. Default is 100.
+
+-M querymode --protocol=querymode
+
+Protocol to use for submitting queries to the server:
+
+    simple: use simple query protocol.
+
+    extended: use extended query protocol.
+
+    prepared: use extended query protocol with prepared statements.
+
+The default is simple query protocol.
+
+-P sec --progress=sec Show progress report every sec seconds. The report includes the time since the beginning of the run, the tps since the last report, and the transaction latency average and standard deviation since the last report. Under throttling (-R), the latency is computed with respect to the transaction scheduled start time, not the actual transaction beginning time, thus it also includes the average schedule lag time.
+
+
+
+=== Sql Script Body To Test Example ===
+\setrandom u1v 1 100000
+\setrandom u2v 20000 20999
+\setrandom u 1 50000
+\setrandom r1 20000 20999
+\setrandom r2 20000 20999
+\setrandom r3 20000 20999
+\setrandom r4 20000 20999
+\setrandom r5 20000 20999
+\setrandom r6 1 100000
+\setrandom r7 1 100000
+\setrandom r8 1 100000
+\setrandom r9 1 100000
+\setrandom r10 1 100000
+select * from foo where	(u1 = :u1v  and u2 in (:r1, :r2, :r3, :r4, :r5)) or (u2 = :u2v and u1 in (:r6, :r7, :r8, :r9, :r10));
+
+=== Pgbench Run Line ===
+-c = number of concurrent database clients
+-f = script file path
+-j = number of threads (the clients are evenly distributed among this number of threads)
+-n = don't run VACUUM (docs require it be set in case of custom a script)
+-t = number of transactions each client makes
+-U = username
+test1 = database name
+pgbench -c 10 -f test.sql -j 10 -n -t 10 -U root test1
+
+
+
+
+
+
+
+
+
