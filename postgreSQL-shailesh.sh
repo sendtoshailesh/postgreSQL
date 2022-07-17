@@ -285,3 +285,22 @@ export PGPASSWORD=$(gcloud auth print-access-token)
 psql --host=$POSTGRESQL_IP $USERNAME --dbname=orders
 
 
+
+
+
+https://www.postgresqltutorial.com/psql-commands/
+
+
+
+psql -h host -d database -U user -W
+
+
+psql -h 10.0.1.7 -d postgres -U postgres
+
+
+admin_shkm_altostrat_com@pg-on-gce:~$ sudo nano /etc/postgresql/12/main/postgresql.conf
+admin_shkm_altostrat_com@pg-on-gce:~$ sudo service postgresql restart
+admin_shkm_altostrat_com@pg-on-gce:~$
+
+
+
