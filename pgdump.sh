@@ -23,7 +23,7 @@ pg_dump -U postgres -t students example_backups > ~/Example_Dumps/students.sql
 
 Backing up multiple tables
 pg_dump -U postgres -W -t classes -t students -d example_backups > ~/Example_Dumps/all_tables.sql
-
+pg_dump -h 10.45.195.2 -U postgres -W -t nation -t orders -t part -t partsupp -t region -t supplier -t lineitem -t customer -d mytpch > example_tables.sql
 
 
 Exporting all databases
