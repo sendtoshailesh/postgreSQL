@@ -187,6 +187,12 @@ postgres=>
 pgbench with only select for 5 min on reader instance with scale up and down
 pgbench --host=10.45.195.2 --username=postgres -n -c 150 -j 150 -S -T 900 -P 5 pgbenchdb
 
+on alloydb, 2vcpu with c=500 (Client) and J thread (pgbench jobs), reaching 60% CPU on reader node
+pgbench --host=10.45.195.2 --username=postgres -n -c 500 -j 150 -S -T 900 -P 5 pgbenchdb
+
+pgbench --host=10.45.195.2 --username=postgres -n -c 500 -j 500 -S -T 900 -P 5 pgbenchdb
+
+
 
 
 
