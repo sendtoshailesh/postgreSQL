@@ -15,6 +15,27 @@ pgbench --host=10.45.195.5 --username=postgres -n -c 10 -S -T 300 -P 5
 pgbench with only select for 5 min on writer instance with scale up and down
 pgbench --host=10.45.195.2 --username=postgres -n -c 10 -T 300 -P 5
 
+pgbench -i -s 2 -U zero2one zero2one -h zero2one-1.cluster-cayf2yabcnxl.ap-southeast-2.rds.amazonaws.com -p
+
+-Initialize pgbench table with 200k tuples
+pgbench -i -s 2 -U zero2one zero2one -h zero2one-1.cluster-cayf2yabcnxl.ap-southeast-2.rds.amazonaws.com -p 5432
+-Run pgbench making 20 simultaneous connections using 4 threads for 60 seconds
+pgbench -c 20 -j 4 -T 60 -U zero2one zero2one  -h zero2one-1.cluster-cayf2yabcnxl.ap-southeast-2.rds.amazonaws.com -p 5432
+
+pgbench -c 50 -j 10 -T 60 -U zero2one zero2one  -h zero2one-1.cluster-cayf2yabcnxl.ap-southeast-2.rds.amazonaws.com -p 5432
+
+pgbench -c 200 -j 40 -T 60 -U zero2one zero2one  -h zero2one-1.cluster-cayf2yabcnxl.ap-southeast-2.rds.amazonaws.com -p 5432
+
+
+-Run pgbench making 80 simultaneous connections using 4 threads for 60 seconds
+pgbench -c 80 -j 4 -T 60 -U opstech_dba bmdb1 -h taftind1.cqukgriejsnl.us-east-1-beta.rds.amazonaws.com -p 8192
+
+pgbench -c 80 -j 16 -T 60 -U opstech_dba bmdb1 -h taftind1.cqukgriejsnl.us-east-1-beta.rds.amazonaws.com -p 8192
+
+pgbench -c 200 -j 4 -T 60 -U opstech_dba bmdb1 -h taftind1.cqukgriejsnl.us-east-1-beta.rds.amazonaws.com -p 8192
+
+pgbench -c 200 -j 40 -T 60 -U opstech_dba bmdb1 -h taftind1.cqukgriejsnl.us-east-1-beta.rds.amazonaws.com -p 8192
+
 
 
 -c clients --client=clients
