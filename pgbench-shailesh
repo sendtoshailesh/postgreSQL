@@ -176,7 +176,7 @@ postgres=>
 
 
 pgbench with only select for 5 min on reader instance with scale up and down
-pgbench --host=10.45.195.2 --username=postgres -n -c 150 -j 50 -S -T 900 -P 5 pgbenchdb
+pgbench --host=10.45.195.2 --username=postgres -n -c 150 -j 150 -S -T 900 -P 5 pgbenchdb
 
 
 
