@@ -38,6 +38,30 @@ pgbench -c 200 -j 40 -T 60 -U opstech_dba bmdb1 -h taftind1.cqukgriejsnl.us-east
 
 
 
+========================================================================================================================
+Populate the test table with a random data sample:
+========================================================================================================================
+
+  test_database=> INSERT INTO test_table SELECT generate_series(1, 100000), md5(random()::text);
+INSERT 0 5000000
+
+test_database=> SELECT * FROM test_table LIMIT 1;
+ id |               col1
+----+----------------------------------
+  1 | daa8c3afc8857cb04d8233bb191ec983
+(1 row)
+
+
+$ echo 'SELECT col1 FROM test_table ORDER BY random() LIMIT 1;' > pgbench.sql
+
+
+pgbench -h HAPROXY_INSTANCE_PRIVATE_IP -U test_client -d test_database -f pgbench.sql -n -C --client 100 --jobs 4 --time 300
+
+
+========================================================================================================================
+
+
+
 -c clients --client=clients
 
 Number of clients simulated, that is, number of concurrent database sessions. Default is 1.
@@ -69,7 +93,7 @@ The default is simple query protocol.
 
 -P sec --progress=sec Show progress report every sec seconds. The report includes the time since the beginning of the run, the tps since the last report, and the transaction latency average and standard deviation since the last report. Under throttling (-R), the latency is computed with respect to the transaction scheduled start time, not the actual transaction beginning time, thus it also includes the average schedule lag time.
 
-
+========================================================================================================================
 
 === Sql Script Body To Test Example ===
 \setrandom u1v 1 100000
@@ -97,7 +121,7 @@ select * from foo where	(u1 = :u1v  and u2 in (:r1, :r2, :r3, :r4, :r5)) or (u2 
 test1 = database name
 pgbench -c 10 -f test.sql -j 10 -n -t 10 -U root test1
 
-
+========================================================================================================================
 
 create database pgbenchdb;
 
