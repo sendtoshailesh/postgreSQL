@@ -60,6 +60,15 @@ pgbench -h HAPROXY_INSTANCE_PRIVATE_IP -U test_client -d test_database -f pgbenc
 
 ========================================================================================================================
 
+pgbench paramaters for concurrency control
+pgbench offers two parameters for controlling the concurrency in the benchmark. Namely:
+
+-j for ‘jobs’. The number of pgbench threads to run.
+-j, --jobs=NUM number of threads (default: 1)
+-c for ‘clients’. The number of “postgres” processes to run.
+-c, --client=NUM number of concurrent database clients (default: 1)
+
+
 
 
 -c clients --client=clients
