@@ -2,6 +2,9 @@ intiailise pgbench with scale factor of 10
 
 pgbench -i -s 10 --host=10.45.195.2 --username=postgres postgres
 
+scale factor of 100
+pgbench -i -s 100 --host=10.45.195.2 --username=postgres postgres
+
 performance test against 10 clients that are accessing your AlloyDB for PostgreSQL database and 100 transactions for each client.
 pgbench --host=10.45.195.2 --username=postgres -c 10 --transactions=100
 
@@ -72,6 +75,64 @@ select * from foo where	(u1 = :u1v  and u2 in (:r1, :r2, :r3, :r4, :r5)) or (u2 
 -U = username
 test1 = database name
 pgbench -c 10 -f test.sql -j 10 -n -t 10 -U root test1
+
+
+
+create database pgbenchdb;
+
+scale factor of 100
+pgbench -i -s 100 --host=10.45.195.2 --username=postgres pgbenchdb
+
+postgres=> \l+
+                                                                                 List of databases
+      Name      |      Owner       | Encoding |  Collate   |   Ctype    |           Access privileges           |  Size   | Tablespace |                Description
+----------------+------------------+----------+------------+------------+---------------------------------------+---------+------------+--------------------------------------------
+ alloydbadmin   | alloydbadmin     | UTF8     | en_US.UTF8 | en_US.UTF8 |                                       | 20 MB   | pg_default |
+ myalloydbbench | postgres         | UTF8     | en_US.UTF8 | en_US.UTF8 |                                       | 18 MB   | pg_default |
+ mytpch         | tpch             | UTF8     | en_US.UTF8 | en_US.UTF8 |                                       | 2077 MB | pg_default |
+ mytpch_clone   | tpch             | UTF8     | en_US.UTF8 | en_US.UTF8 |                                       | 2077 MB | pg_default |
+ mytpch_clone_2 | tpch             | UTF8     | en_US.UTF8 | en_US.UTF8 |                                       | 2078 MB | pg_default |
+ pgbenchdb      | postgres         | UTF8     | en_US.UTF8 | en_US.UTF8 |                                       | 1515 MB | pg_default |
+ postgres       | alloydbsuperuser | UTF8     | en_US.UTF8 | en_US.UTF8 |                                       | 169 MB  | pg_default | default administrative connection database
+ shailesh       | postgres         | UTF8     | en_US.UTF8 | en_US.UTF8 |                                       | 2341 MB | pg_default |
+ shtest         | postgres         | UTF8     | en_US.UTF8 | en_US.UTF8 |                                       | 292 MB  | pg_default |
+ template0      | alloydbadmin     | UTF8     | en_US.UTF8 | en_US.UTF8 | =c/alloydbadmin                      +| 18 MB   | pg_default | unmodifiable empty database
+                |                  |          |            |            | alloydbadmin=CTc/alloydbadmin         |         |            |
+ template1      | alloydbsuperuser | UTF8     | en_US.UTF8 | en_US.UTF8 | =c/alloydbsuperuser                  +| 18 MB   | pg_default | default template for new databases
+                |                  |          |            |            | alloydbsuperuser=CTc/alloydbsuperuser |         |            |
+(11 rows)
+
+postgres=>
+
+
+scalefactor of 1000
+pgbench -i -s 1000 --host=10.45.195.2 --username=postgres pgbenchdb
+
+postgres=> \l+
+                                                                                 List of databases
+      Name      |      Owner       | Encoding |  Collate   |   Ctype    |           Access privileges           |  Size   | Tablespace |                Description
+----------------+------------------+----------+------------+------------+---------------------------------------+---------+------------+--------------------------------------------
+ alloydbadmin   | alloydbadmin     | UTF8     | en_US.UTF8 | en_US.UTF8 |                                       | 20 MB   | pg_default |
+ myalloydbbench | postgres         | UTF8     | en_US.UTF8 | en_US.UTF8 |                                       | 18 MB   | pg_default |
+ mytpch         | tpch             | UTF8     | en_US.UTF8 | en_US.UTF8 |                                       | 2077 MB | pg_default |
+ mytpch_clone   | tpch             | UTF8     | en_US.UTF8 | en_US.UTF8 |                                       | 2077 MB | pg_default |
+ mytpch_clone_2 | tpch             | UTF8     | en_US.UTF8 | en_US.UTF8 |                                       | 2078 MB | pg_default |
+ pgbenchdb      | postgres         | UTF8     | en_US.UTF8 | en_US.UTF8 |                                       | 15 GB   | pg_default |
+ postgres       | alloydbsuperuser | UTF8     | en_US.UTF8 | en_US.UTF8 |                                       | 169 MB  | pg_default | default administrative connection database
+ shailesh       | postgres         | UTF8     | en_US.UTF8 | en_US.UTF8 |                                       | 2341 MB | pg_default |
+ shtest         | postgres         | UTF8     | en_US.UTF8 | en_US.UTF8 |                                       | 292 MB  | pg_default |
+ template0      | alloydbadmin     | UTF8     | en_US.UTF8 | en_US.UTF8 | =c/alloydbadmin                      +| 18 MB   | pg_default | unmodifiable empty database
+                |                  |          |            |            | alloydbadmin=CTc/alloydbadmin         |         |            |
+ template1      | alloydbsuperuser | UTF8     | en_US.UTF8 | en_US.UTF8 | =c/alloydbsuperuser                  +| 18 MB   | pg_default | default template for new databases
+                |                  |          |            |            | alloydbsuperuser=CTc/alloydbsuperuser |         |            |
+(11 rows)
+
+postgres=>
+
+
+pgbench with only select for 5 min on reader instance with scale up and down
+pgbench --host=10.45.195.2 --username=postgres -n -c 50 -S -T 300 -P 5 pgbenchdb
+
 
 
 
