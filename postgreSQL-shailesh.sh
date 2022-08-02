@@ -39,27 +39,6 @@ psql -U admin -h localhost -p 3308 postgres
 
 create database abc;
 
-pgbench -i -s 2 -U zero2one zero2one -h zero2one-1.cluster-cayf2yabcnxl.ap-southeast-2.rds.amazonaws.com -p
-
--Initialize pgbench table with 200k tuples
-pgbench -i -s 2 -U zero2one zero2one -h zero2one-1.cluster-cayf2yabcnxl.ap-southeast-2.rds.amazonaws.com -p 5432
--Run pgbench making 20 simultaneous connections using 4 threads for 60 seconds
-pgbench -c 20 -j 4 -T 60 -U zero2one zero2one  -h zero2one-1.cluster-cayf2yabcnxl.ap-southeast-2.rds.amazonaws.com -p 5432
-
-pgbench -c 50 -j 10 -T 60 -U zero2one zero2one  -h zero2one-1.cluster-cayf2yabcnxl.ap-southeast-2.rds.amazonaws.com -p 5432
-
-pgbench -c 200 -j 40 -T 60 -U zero2one zero2one  -h zero2one-1.cluster-cayf2yabcnxl.ap-southeast-2.rds.amazonaws.com -p 5432
-
-
--Run pgbench making 80 simultaneous connections using 4 threads for 60 seconds
-pgbench -c 80 -j 4 -T 60 -U opstech_dba bmdb1 -h taftind1.cqukgriejsnl.us-east-1-beta.rds.amazonaws.com -p 8192
-
-pgbench -c 80 -j 16 -T 60 -U opstech_dba bmdb1 -h taftind1.cqukgriejsnl.us-east-1-beta.rds.amazonaws.com -p 8192
-
-pgbench -c 200 -j 4 -T 60 -U opstech_dba bmdb1 -h taftind1.cqukgriejsnl.us-east-1-beta.rds.amazonaws.com -p 8192
-
-pgbench -c 200 -j 40 -T 60 -U opstech_dba bmdb1 -h taftind1.cqukgriejsnl.us-east-1-beta.rds.amazonaws.com -p 8192
-
 
 
 
@@ -81,22 +60,6 @@ $ for i in `seq 1 20`; do \
 
 
 
-Populate the test table with a random data sample:
-
-  test_database=> INSERT INTO test_table SELECT generate_series(1, 100000), md5(random()::text);
-INSERT 0 5000000
-
-test_database=> SELECT * FROM test_table LIMIT 1;
- id |               col1
-----+----------------------------------
-  1 | daa8c3afc8857cb04d8233bb191ec983
-(1 row)
-
-
-$ echo 'SELECT col1 FROM test_table ORDER BY random() LIMIT 1;' > pgbench.sql
-
-
-pgbench -h HAPROXY_INSTANCE_PRIVATE_IP -U test_client -d test_database -f pgbench.sql -n -C --client 100 --jobs 4 --time 300
 
 
 
