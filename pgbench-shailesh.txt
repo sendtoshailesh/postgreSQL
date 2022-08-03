@@ -37,6 +37,9 @@ pgbench -c 200 -j 4 -T 60 -U opstech_dba bmdb1 -h taftind1.cqukgriejsnl.us-east-
 pgbench -c 200 -j 40 -T 60 -U opstech_dba bmdb1 -h taftind1.cqukgriejsnl.us-east-1-beta.rds.amazonaws.com -p 8192
 
 
+pgbench -h 10.45.195.5 -j 16 -c 128 -T 10 -S -n -U postgres pgbenchdb
+
+pgbench -h 10.45.194.248 -j 16 -c 128 -T 10 -S -n -U postgres mydb
 
 ========================================================================================================================
 Populate the test table with a random data sample:
