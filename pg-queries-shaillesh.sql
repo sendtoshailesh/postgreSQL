@@ -1,6 +1,6 @@
 View connection information
 
-SELECT datname,usename,client_addr,client_port FROM pg_stat_activity ;
+SELECT datname,usename,client_addr,client_port,query FROM pg_stat_activity ;
 
 
 Query the SQL execution information
