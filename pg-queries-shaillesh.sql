@@ -15,4 +15,15 @@ bench=# SELECT query, calls, total_exec_time, rows, 100.0 * shared_blks_hit /
           FROM pg_stat_statements ORDER BY total_exec_time DESC LIMIT 5;
           
           
-          
+
+blocking another session.
+
+select pid, 
+       usename, 
+       pg_blocking_pids(pid) as blocked_by, 
+       query as blocked_query
+from pg_stat_activity
+where cardinality(pg_blocking_pids(pid)) > 0;
+
+
+
