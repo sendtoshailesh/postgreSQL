@@ -15,7 +15,9 @@ postgres=> create database mydb owner myuser;
 CREATE DATABASE
 postgres=>
 
-
+SELECT grantor, grantee, table_schema, table_name, privilege_type
+FROM information_schema.table_privileges
+WHERE grantee = 'myuser'
 
 ==============================================================================
 admin_shkm_altostrat_com@instance-mumbai:~$ psql -h 10.45.193.4 -U postgres
