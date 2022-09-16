@@ -27,11 +27,14 @@ CREATE TABLE accounts (
 CREATE TABLE accounts (
 	user_id serial PRIMARY KEY,
 	username VARCHAR ( 50 ) UNIQUE NOT NULL,
-	password VARCHAR ( 50 ) NOT NULL,
+	password VARCHAR ( 50 ) NOT NULL
 );
 
 
-insert into accounts values('User1','Password1');
-insert into accounts values('User2','Password2');
-insert into accounts values('User3','Password3');
-insert into accounts values('User4','Password4');
+insert into accounts (username,password) values('User1','Password1');
+insert into accounts (username,password) values('User2','Password2');
+insert into accounts (username,password) values('User3','Password3');
+insert into accounts (username,password) values('User4','Password4');
+
+select * from accounts;
+
