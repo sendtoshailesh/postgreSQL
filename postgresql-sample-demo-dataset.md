@@ -31,3 +31,7 @@ CREATE TABLE accounts (
 );
 
 
+insert into accounts values('User1','Password1');
+insert into accounts values('User2','Password2');
+insert into accounts values('User3','Password3');
+insert into accounts values('User4','Password4');
