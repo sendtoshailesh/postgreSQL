@@ -6,6 +6,8 @@ sudo yum install postgresql-client postgresql-contrib
 
 sudo apt -y install postgresql-client
 
+sudo amazon-linux-extras install postgresql10
+
 brew install libpq
 brew link --force libpq ail
 
