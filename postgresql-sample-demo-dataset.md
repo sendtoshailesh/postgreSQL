@@ -17,7 +17,7 @@ create database pagila
 
 \i /home/ec2-user/environment/pagila/pagila-data.sql
 
-
+```
 pagila=# \ds+
  public | actor_actor_id_seq         | sequence | postgres | 8192 bytes | 
  public | address_address_id_seq     | sequence | postgres | 8192 bytes | 
@@ -60,7 +60,7 @@ pagila=#
 
 
 pagila=# 
-
+```
 
 
 ```
