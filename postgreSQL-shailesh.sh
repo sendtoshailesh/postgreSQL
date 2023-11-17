@@ -2,6 +2,8 @@ sudo yum install postgresql
 
 sudo apt -y install postgresql postgresql-client postgresql-contrib
 
+sudo yum install postgresql-client postgresql-contrib
+
 sudo apt -y install postgresql-client
 
 brew install libpq
