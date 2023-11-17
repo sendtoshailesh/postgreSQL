@@ -5,6 +5,19 @@ https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-
 Sample Databases
 https://wiki.postgresql.org/wiki/Sample_Databases
 
+git clone https://github.com/devrimgunduz/pagila.git
+
+connect to pg db
+create database pagila
+\c pagila
+\i /home/ec2-user/environment/pagila/pagila-schema.sql
+\i /home/ec2-user/environment/pagila/pagila-data.sql
+
+
+pagila=# 
+
+
+
 ```
 admin_shkm_altostrat_com@instance-mumbai:~/cloud-sql-pg$ psql -h 10.45.192.3 -U postgres < demo-big-en-20170815.sql
 
