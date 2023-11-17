@@ -8,10 +8,55 @@ https://wiki.postgresql.org/wiki/Sample_Databases
 git clone https://github.com/devrimgunduz/pagila.git
 
 connect to pg db
+
 create database pagila
+
 \c pagila
+
 \i /home/ec2-user/environment/pagila/pagila-schema.sql
+
 \i /home/ec2-user/environment/pagila/pagila-data.sql
+
+
+pagila=# \ds+
+ public | actor_actor_id_seq         | sequence | postgres | 8192 bytes | 
+ public | address_address_id_seq     | sequence | postgres | 8192 bytes | 
+ public | category_category_id_seq   | sequence | postgres | 8192 bytes | 
+ public | city_city_id_seq           | sequence | postgres | 8192 bytes | 
+ public | country_country_id_seq     | sequence | postgres | 8192 bytes | 
+ public | customer_customer_id_seq   | sequence | postgres | 8192 bytes | 
+ public | film_film_id_seq           | sequence | postgres | 8192 bytes | 
+ public | inventory_inventory_id_seq | sequence | postgres | 8192 bytes | 
+ public | language_language_id_seq   | sequence | postgres | 8192 bytes | 
+ public | payment_payment_id_seq     | sequence | postgres | 8192 bytes | 
+ public | rental_rental_id_seq       | sequence | postgres | 8192 bytes | 
+ public | staff_staff_id_seq         | sequence | postgres | 8192 bytes | 
+ public | store_store_id_seq         | sequence | postgres | 8192 bytes | 
+
+pagila=# \l+
+ pagila    | postgres | UTF8     | C.UTF-8 | C.UTF-8 |                       | 16 MB   | pg_default | 
+ postgres  | postgres | UTF8     | C.UTF-8 | C.UTF-8 |                       | 7669 kB | pg_default | default administrative connection database
+ template0 | postgres | UTF8     | C.UTF-8 | C.UTF-8 | =c/postgres          +| 7513 kB | pg_default | unmodifiable empty database
+           |          |          |         |         | postgres=CTc/postgres |         |            | 
+ template1 | postgres | UTF8     | C.UTF-8 | C.UTF-8 | =c/postgres          +| 7765 kB | pg_default | default template for new databases
+           |          |          |         |         | postgres=CTc/postgres |         |            | 
+
+pagila=# \t
+Tuples only is off.
+pagila=# \l+
+                                                                List of databases
+   Name    |  Owner   | Encoding | Collate |  Ctype  |   Access privileges   |  Size   | Tablespace |                Description                 
+-----------+----------+----------+---------+---------+-----------------------+---------+------------+--------------------------------------------
+ pagila    | postgres | UTF8     | C.UTF-8 | C.UTF-8 |                       | 16 MB   | pg_default | 
+ postgres  | postgres | UTF8     | C.UTF-8 | C.UTF-8 |                       | 7669 kB | pg_default | default administrative connection database
+ template0 | postgres | UTF8     | C.UTF-8 | C.UTF-8 | =c/postgres          +| 7513 kB | pg_default | unmodifiable empty database
+           |          |          |         |         | postgres=CTc/postgres |         |            | 
+ template1 | postgres | UTF8     | C.UTF-8 | C.UTF-8 | =c/postgres          +| 7765 kB | pg_default | default template for new databases
+           |          |          |         |         | postgres=CTc/postgres |         |            | 
+(4 rows)
+
+pagila=# 
+
 
 
 pagila=# 
