@@ -1,3 +1,5 @@
+sudo dnf install postgresql15-client
+
 sudo yum install postgresql
 
 sudo apt -y install postgresql postgresql-client postgresql-contrib
