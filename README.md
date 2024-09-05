@@ -78,10 +78,6 @@ Each script or file in this repository serves a specific purpose related to Post
 
 Feel free to fork this repository and submit pull requests for any improvements or additional PostgreSQL-related tools and scripts.
 
-## License
-
-[Specify your license here]
-
 ## Notes
 
 - Some scripts and files are personalized (e.g., 'shailesh' in file names). You may need to modify these for your specific use case.
